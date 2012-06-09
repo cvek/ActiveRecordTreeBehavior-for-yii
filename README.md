@@ -3,10 +3,10 @@ ActiveRecordTreeBehavior-for-yii
 
 Работа с иерархичными (id - parent_id) ActiveRecord такой структуры:
 
-id_primary_key
-id_parent
-sequence
-name
+id_primary_key<br>
+id_parent<br>
+sequence<br>
+name<br>
 ...
 
 Подключается к модели следующим образом (пример для категорий товаров):
@@ -32,14 +32,14 @@ name
     ...
 
 
-Список методов:
-getTree()
-getParent()
-getChildCount()
-getChild()
-isChildExists()
-getChildById($id)
-getParentById($id)
-isAncestor(CActiveRecord $model)
-isDescendant(CActiveRecord $model, $checkSelf = false)
-getRootParent()
+Список методов:<br>
+getTree()<br>
+getParent()<br>
+getChildCount()<br>
+getChild()<br>
+isChildExists()<br>
+getChildById($id)<br>
+getParentById($id)<br>
+isAncestor(CActiveRecord $model)<br>
+isDescendant(CActiveRecord $model, $checkSelf = false)<br>
+getRootParent()<br>
