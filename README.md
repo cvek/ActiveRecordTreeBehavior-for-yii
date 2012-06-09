@@ -43,3 +43,5 @@ getParentById($id)<br>
 isAncestor(CActiveRecord $model)<br>
 isDescendant(CActiveRecord $model, $checkSelf = false)<br>
 getRootParent()<br>
+
+При использовании стоит учитывать, что все записи будут загружены в память.
