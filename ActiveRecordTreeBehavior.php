@@ -108,7 +108,7 @@ class ActiveRecordTreeBehavior extends CBehavior {
   public function getParent() {
     $idParentField = $this->idParentField;
     if ($this->owner->$idParentField !== null && $this->_parent === null) {
-      $this->_parent = $this->owner->model()->findByPk($this->owner->getPrimaryKey());
+      $this->_parent = $this->owner->model()->findByPk($this->owner->$idParentField);
     } 
     return $this->_parent;
   }  
