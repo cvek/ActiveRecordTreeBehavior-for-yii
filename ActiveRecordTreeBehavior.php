@@ -46,9 +46,11 @@ class ActiveRecordTreeBehavior extends CBehavior {
   
   /**
    * Получение дерева экземпляров модели
+   * @param mixed $addCriteria параметры запроса на получение данных
+   * @param string $cacheKey ключ для кэширования данных
    */
-  public function getTree() {
-    $cacheKey = $this->owner->tableName();
+  public function getTree($addCriteria=array(), $cacheKey=null) {
+    $cacheKey = ($cacheKey == null ? $this->owner->tableName() : $cacheKey);
     if ( isset(self::$_tree[$cacheKey]) ) {
       return self::$_tree[$cacheKey];
     }
@@ -60,8 +62,9 @@ class ActiveRecordTreeBehavior extends CBehavior {
       $criteria = new CDbCriteria();
       $criteria->order = $this->order;
       if ($this->with != null) $criteria->with = $this->with;
+      $criteria->mergeWith($addCriteria);
       $items = $this->owner->model()->findAll($criteria);
-       
+
       $child = array();
       $countIntems = count($items);
       
@@ -179,7 +182,7 @@ class ActiveRecordTreeBehavior extends CBehavior {
    * @param DaActiveRecord $model
    */
   public function isAncestor(CActiveRecord $model) {
-    return $model->getParentById($this->getPrimaryKey()) !== null;
+    return $model->getParentById($this->owner->getPrimaryKey()) !== null;
   }
   
   /**
@@ -197,7 +200,7 @@ class ActiveRecordTreeBehavior extends CBehavior {
   public function getRootParent() {
     $parent = $this->getParent();
     if ($parent === null) {
-      return $this;
+      return $this->owner;
     }
     return $parent->getRootParent();
   }
