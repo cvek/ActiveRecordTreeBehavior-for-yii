@@ -1,5 +1,5 @@
-<?php
-class ActiveRecordTreeBehavior extends CBehavior {
+﻿<?php
+class ActiveRecordTreeBehavior extends CActiveRecordBehavior{
 
   /**
    * Сортировка данных: имя поля родителя, имя поля порядка
@@ -214,6 +214,12 @@ class ActiveRecordTreeBehavior extends CBehavior {
       return $this;
     }
     return $this->getChildById($id);
+  }
+
+  protected function afterSave($event){
+    $cacheKey = ($cacheKey == null ? $this->owner->tableName() : $cacheKey);
+
+    Yii::app()->cache->delete($id);
   }
 
 }
