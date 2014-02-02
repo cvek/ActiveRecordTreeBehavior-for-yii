@@ -217,7 +217,7 @@ class ActiveRecordTreeBehavior extends CActiveRecordBehavior{
   }
 
   protected function afterSave($event){
-    Yii::app()->cache->delete($$cacheKey == null ? $this->owner->tableName() : $cacheKey);
+    Yii::app()->cache->delete($cacheKey == null ? $this->owner->tableName() : $cacheKey);
   }
 
 }
